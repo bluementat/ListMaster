@@ -1,40 +1,19 @@
-﻿@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-
-@inherits LayoutComponentBase
-@inject NavigationManager Navigation
-@inject SignOutSessionStateManager SignOutManager
-
+﻿@inherits LayoutComponentBase
 
 <div class="mainview">
     <div class="topmenu">
         <div class="menuicon">
-
+            @Body
         </div>
         <div class="menuicon">
-            First Option
-        </div>
-        <div class="menuicon">
-            Second Option
-        </div>
-        <div class="menuicon">
-
-        </div>
+            <LoginDisplay />
+        </div>        
     </div>
 
     <div class="listchatactivities">
-        <div class="chatsection">
-            <AuthorizeView>
-                <Authorized>
-                    <ListMaster.Client.Pages.Chat />
-                </Authorized>
-                <NotAuthorized>
-                    <a href="authentication/register">Register</a>
-                    <a href="authentication/login">Log in</a>
-                </NotAuthorized>
-            </AuthorizeView>
+        <div class="chatsection">            
+            <ChatComponent />
         </div>
-
 
         <div class="listsection">
             <div class="mainlist">

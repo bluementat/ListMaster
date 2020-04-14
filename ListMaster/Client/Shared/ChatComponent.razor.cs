@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ListMaster.Client.Pages
+namespace ListMaster.Client.Shared
 {
-    public partial class Chat : ComponentBase
+    public partial class ChatComponent : ComponentBase
     {
         private HubConnection _hubConnection;
-        private List<ChatMessageViewModel> _messages = new List<ChatMessageViewModel>();        
+        private List<ChatMessageViewModel> _messages = new List<ChatMessageViewModel>();
         private string _messageInput;
 
         protected override async Task OnInitializedAsync()
@@ -41,8 +41,8 @@ namespace ListMaster.Client.Pages
             _hubConnection.SendAsync("GetCurrentMessages", _hubConnection.ConnectionId);
 
         Task Send() =>
-            _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel() 
-            { 
+            _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel()
+            {
                 MessageBody = _messageInput,
                 Username = "SomeName",
                 Kudos = 0,
@@ -61,5 +61,5 @@ namespace ListMaster.Client.Pages
 
     }
 
-    
+
 }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ListMaster.Server.Data.Migrations
+namespace ListMaster.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200413234703_ChatMessagesKudosAndMoreUserProperties")]
-    partial class ChatMessagesKudosAndMoreUserProperties
+    [Migration("20200414172956_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,25 +115,12 @@ namespace ListMaster.Server.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

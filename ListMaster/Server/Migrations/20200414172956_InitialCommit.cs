@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ListMaster.Server.Data.Migrations
+namespace ListMaster.Server.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -186,6 +186,53 @@ namespace ListMaster.Server.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ChatMessages",
+                columns: table => new
+                {
+                    ChatMessageId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MessageBody = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatMessages", x => x.ChatMessageId);
+                    table.ForeignKey(
+                        name: "FK_ChatMessages_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Kudos",
+                columns: table => new
+                {
+                    KudoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    ChatMessageId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kudos", x => x.KudoId);
+                    table.ForeignKey(
+                        name: "FK_Kudos_ChatMessages_ChatMessageId",
+                        column: x => x.ChatMessageId,
+                        principalTable: "ChatMessages",
+                        principalColumn: "ChatMessageId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kudos_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -226,6 +273,11 @@ namespace ListMaster.Server.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChatMessages_UserId",
+                table: "ChatMessages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -235,6 +287,16 @@ namespace ListMaster.Server.Data.Migrations
                 name: "IX_DeviceCodes_Expiration",
                 table: "DeviceCodes",
                 column: "Expiration");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kudos_ChatMessageId",
+                table: "Kudos",
+                column: "ChatMessageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kudos_UserId",
+                table: "Kudos",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_Expiration",
@@ -268,10 +330,16 @@ namespace ListMaster.Server.Data.Migrations
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
+                name: "Kudos");
+
+            migrationBuilder.DropTable(
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ChatMessages");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
