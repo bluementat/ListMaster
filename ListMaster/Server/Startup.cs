@@ -18,7 +18,7 @@ using ListMaster.Server.Hubs;
 namespace ListMaster.Server
 {
     public class Startup
-    {
+    {                
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

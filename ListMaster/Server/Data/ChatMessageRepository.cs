@@ -1,5 +1,6 @@
 ﻿using ListMaster.Server.Models;
 using ListMaster.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,26 +19,35 @@ namespace ListMaster.Server.Data
 
         public IEnumerable<ChatMessage> GetAllMessages()
         {
-            return _context.ChatMessages.OrderBy(m => m.ChatMessageId);
+            return _context.ChatMessages.OrderBy(m => m.ChatMessageId)
+                .Include(c => c.User);
         }
 
         public IEnumerable<ChatMessageViewModel> GetAllMessagesForClient()
         {
             List<ChatMessageViewModel> results = new List<ChatMessageViewModel>();
-            
-            var messages = _context.ChatMessages.OrderBy(m => m.ChatMessageId);
 
-            foreach(ChatMessage message in messages)
+            var messages = _context.ChatMessages.OrderBy(m => m.ChatMessageId).Include(c => c.User);
+
+            
+            foreach (ChatMessage message in messages)
             {
+                int NumberOfKudos = 0;
+                    
+                if(message.MessageKudos != null)
+                {
+                    NumberOfKudos = message.MessageKudos.Count();
+                }
+
                 results.Add(new ChatMessageViewModel()
                 {
                     MessageBody = message.MessageBody,
                     Username = message.User.UserName,
-                    Kudos = message.MessageKudos.Count(),
+                    Kudos = NumberOfKudos,
                     CreatedDate = message.CreatedDate
                 });
             }
-
+            
             return results;
         }
 

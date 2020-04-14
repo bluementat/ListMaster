@@ -1,5 +1,6 @@
 ﻿using ListMaster.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace ListMaster.Client.Shared
 {
     public partial class ChatComponent : ComponentBase
     {
+        [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+
         private HubConnection _hubConnection;
         private List<ChatMessageViewModel> _messages = new List<ChatMessageViewModel>();
         private string _messageInput;
@@ -22,7 +25,6 @@ namespace ListMaster.Client.Shared
 
             _hubConnection.On<ChatMessageViewModel>("ReceiveMessage", (message) =>
             {
-                // var encodedMsg = $"{user}: {message}";
                 var encodedMsg = message;
                 _messages.Add(encodedMsg);
                 StateHasChanged();
@@ -33,6 +35,7 @@ namespace ListMaster.Client.Shared
                 _messages = messages;
                 StateHasChanged();
             });
+            var authState = await authenticationStateTask;
 
             await _hubConnection.StartAsync().ContinueWith(delegate { LoadCurrentMessages(); });
         }
@@ -40,15 +43,22 @@ namespace ListMaster.Client.Shared
         Task LoadCurrentMessages() =>
             _hubConnection.SendAsync("GetCurrentMessages", _hubConnection.ConnectionId);
 
-        Task Send() =>
-            _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel()
+        async Task Send()
+        {
+            var authState = await authenticationStateTask;
+            var user = authState.User;
+
+            await _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel()
             {
                 MessageBody = _messageInput,
-                Username = "SomeName",
+                Username = user.Identity.Name,
                 Kudos = 0,
                 CreatedDate = DateTime.Now
 
             }).ContinueWith(delegate { ClearChatTextBox(); });
+
+        }
+            
 
         Task ClearChatTextBox()
         {
