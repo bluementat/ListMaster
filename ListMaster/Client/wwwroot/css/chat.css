@@ -1,0 +1,58 @@
+﻿.chatcomponent {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: lightcoral;
+    height: inherit;
+    width: inherit;
+}
+
+
+.chatscreen {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow: auto;
+    background-color: slategray;
+}
+
+.listitem {
+    /*flex: 1;*/
+    border-radius: 5px;
+    border-color: black;
+    width: 100%;
+    padding: 2px;
+    margin: 2px;
+    background-color: wheat;
+}
+
+.chattextbox {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    background-color: lightgray;
+    /*max-height: 100px;*/
+}
+
+.chattextarea {
+    flex: 4;
+    border: thick;
+    border-radius: 5px;
+    padding: 2px;
+    height: 100%;
+    width: 100%;
+    resize: none;
+}
+
+.chatbuttonarea {
+    flex: 1;
+}
+
+.chatbuttonrow {
+    height: 50px;
+}
+
+.chatbutton {
+    width: 50px;
+}

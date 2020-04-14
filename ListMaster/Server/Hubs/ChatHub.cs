@@ -20,7 +20,7 @@ namespace ListMaster.Server.Hubs
 
         public async Task GetCurrentMessages(string connectionid)
         {
-            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMessages", _messagerepo.GetAllMessages());
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMessages", _messagerepo.GetAllMessagesForClient());
         }
 
         public async Task SendMessage(string username, ChatMessageViewModel message)

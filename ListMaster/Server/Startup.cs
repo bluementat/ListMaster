@@ -81,8 +81,9 @@ namespace ListMaster.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapFallbackToFile("index.html");
+                endpoints.MapHub<ChatHub>("/chatHub");
+
             });
         }
     }
