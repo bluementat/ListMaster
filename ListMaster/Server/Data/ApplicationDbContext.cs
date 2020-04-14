@@ -17,5 +17,8 @@ namespace ListMaster.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Kudo> Kudos { get; set; }
     }
 }
