@@ -19,5 +19,13 @@ namespace ListMaster.Server.Data
         {
             return _context.MasterLists.FirstOrDefault(m => m.Active == true);
         }
+
+        public bool AddListoidToList(Listoid listoid)
+        {
+            _context.Listoids.Add(listoid);
+            int result = _context.SaveChanges();
+
+            return result == 0;
+        }
     }
 }

@@ -9,7 +9,9 @@ namespace ListMaster.Server.Data
     public interface IMasterListRepository
     {
         public MasterList GetActiveList();
-        
+
+        public bool AddListoidToList(Listoid listoid);
+
         // public IEnumerable<Listoid> GetListoidsFromMasterList(MasterList masterlist);
     }
 }

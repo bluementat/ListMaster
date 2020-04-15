@@ -14,10 +14,12 @@ namespace ListMaster.Server.Hubs
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private IChatMessageRepository _messagerepo;
+        private IMasterListRepository _listrepo;
 
-        public ChatHub(IChatMessageRepository messagerepo, UserManager<ApplicationUser> userManager)
+        public ChatHub(IChatMessageRepository messagerepo, IMasterListRepository listrepo, UserManager<ApplicationUser> userManager)
         {
             _messagerepo = messagerepo;
+            _listrepo = listrepo;
             _userManager = userManager;
         }
 
@@ -47,11 +49,18 @@ namespace ListMaster.Server.Hubs
         public async Task SendListoid(ChatMessageViewModel message)
         {
             var user = await _userManager.FindByNameAsync(message.Username);
+            var currentlist = _listrepo.GetActiveList();
 
             var listoidToAdd = new Listoid()
             {
-
+                MasterList = currentlist,
+                Kudos = new List<Kudo>(),
+                MessageBody = message.MessageBody,
+                User = user,
+                CreateDate = DateTime.Now
             };
+
+            _listrepo.AddListoidToList(listoidToAdd);
         }
     }
 }
