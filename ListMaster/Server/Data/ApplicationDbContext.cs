@@ -20,5 +20,7 @@ namespace ListMaster.Server.Data
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<Kudo> Kudos { get; set; }
+        public DbSet<MasterList> MasterLists { get; set; }
+        public DbSet<Listoid> Listoids { get; set; }
     }
 }

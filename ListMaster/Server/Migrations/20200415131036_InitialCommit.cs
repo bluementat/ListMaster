@@ -208,13 +208,63 @@ namespace ListMaster.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MasterLists",
+                columns: table => new
+                {
+                    MasterListId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    CreatorId = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MasterLists", x => x.MasterListId);
+                    table.ForeignKey(
+                        name: "FK_MasterLists_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Listoids",
+                columns: table => new
+                {
+                    ListoidId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MasterListId = table.Column<int>(nullable: true),
+                    MessageBody = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    CreateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Listoids", x => x.ListoidId);
+                    table.ForeignKey(
+                        name: "FK_Listoids_MasterLists_MasterListId",
+                        column: x => x.MasterListId,
+                        principalTable: "MasterLists",
+                        principalColumn: "MasterListId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Listoids_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Kudos",
                 columns: table => new
                 {
                     KudoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
-                    ChatMessageId = table.Column<int>(nullable: true)
+                    ChatMessageId = table.Column<int>(nullable: true),
+                    ListoidId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,6 +274,12 @@ namespace ListMaster.Server.Migrations
                         column: x => x.ChatMessageId,
                         principalTable: "ChatMessages",
                         principalColumn: "ChatMessageId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kudos_Listoids_ListoidId",
+                        column: x => x.ListoidId,
+                        principalTable: "Listoids",
+                        principalColumn: "ListoidId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Kudos_AspNetUsers_UserId",
@@ -294,9 +350,29 @@ namespace ListMaster.Server.Migrations
                 column: "ChatMessageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Kudos_ListoidId",
+                table: "Kudos",
+                column: "ListoidId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Kudos_UserId",
                 table: "Kudos",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listoids_MasterListId",
+                table: "Listoids",
+                column: "MasterListId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listoids_UserId",
+                table: "Listoids",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MasterLists_CreatorId",
+                table: "MasterLists",
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_Expiration",
@@ -340,6 +416,12 @@ namespace ListMaster.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "ChatMessages");
+
+            migrationBuilder.DropTable(
+                name: "Listoids");
+
+            migrationBuilder.DropTable(
+                name: "MasterLists");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListMaster.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200414172956_InitialCommit")]
+    [Migration("20200415131036_InitialCommit")]
     partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,6 +201,9 @@ namespace ListMaster.Server.Migrations
                     b.Property<int?>("ChatMessageId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ListoidId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -208,9 +211,62 @@ namespace ListMaster.Server.Migrations
 
                     b.HasIndex("ChatMessageId");
 
+                    b.HasIndex("ListoidId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Kudos");
+                });
+
+            modelBuilder.Entity("ListMaster.Server.Models.Listoid", b =>
+                {
+                    b.Property<int>("ListoidId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MasterListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MessageBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ListoidId");
+
+                    b.HasIndex("MasterListId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Listoids");
+                });
+
+            modelBuilder.Entity("ListMaster.Server.Models.MasterList", b =>
+                {
+                    b.Property<int>("MasterListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MasterListId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("MasterLists");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -361,9 +417,31 @@ namespace ListMaster.Server.Migrations
                         .WithMany("MessageKudos")
                         .HasForeignKey("ChatMessageId");
 
+                    b.HasOne("ListMaster.Server.Models.Listoid", null)
+                        .WithMany("Kudos")
+                        .HasForeignKey("ListoidId");
+
                     b.HasOne("ListMaster.Server.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ListMaster.Server.Models.Listoid", b =>
+                {
+                    b.HasOne("ListMaster.Server.Models.MasterList", "MasterList")
+                        .WithMany("Listoids")
+                        .HasForeignKey("MasterListId");
+
+                    b.HasOne("ListMaster.Server.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ListMaster.Server.Models.MasterList", b =>
+                {
+                    b.HasOne("ListMaster.Server.Models.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

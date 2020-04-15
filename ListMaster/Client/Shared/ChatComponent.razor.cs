@@ -58,6 +58,22 @@ namespace ListMaster.Client.Shared
             }).ContinueWith(delegate { ClearChatTextBox(); });
 
         }
+
+
+        async Task AddToList()
+        {
+            var authState = await authenticationStateTask;
+            var user = authState.User;
+
+            await _hubConnection.SendAsync("SendListoid", new ChatMessageViewModel()
+            {
+                MessageBody = _messageInput,
+                Username = user.Identity.Name,
+                Kudos = 0,
+                CreatedDate = DateTime.Now
+
+            }).ContinueWith(delegate { ClearChatTextBox(); });
+        }
             
 
         Task ClearChatTextBox()

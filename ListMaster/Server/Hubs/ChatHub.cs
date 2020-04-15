@@ -42,6 +42,16 @@ namespace ListMaster.Server.Hubs
             _messagerepo.SaveMessage(messageToSave);
 
             await Clients.All.SendAsync("ReceiveMessage", message);
+        }        
+
+        public async Task SendListoid(ChatMessageViewModel message)
+        {
+            var user = await _userManager.FindByNameAsync(message.Username);
+
+            var listoidToAdd = new Listoid()
+            {
+
+            };
         }
     }
 }

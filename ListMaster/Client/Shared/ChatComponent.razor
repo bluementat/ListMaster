@@ -17,8 +17,8 @@
             <div class="chattextbox">
                 <textarea class="chattextarea" @bind="_messageInput" />
                 <div class="chatbuttonarea">
-                    <button @onclick="Send" disabled="@(!IsConnected)" class="chatbutton">Alpha</button>
-                    <button class="chatbutton">Beta</button>
+                    <button @onclick="Send" disabled="@(!IsConnected)" class="chatbutton">Chat</button>
+                    <button @onclick="AddToList" disabled="@(!IsConnected)" class="chatbutton">List</button>
                 </div>
             </div>
         </Authorized>
