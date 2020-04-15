@@ -12,8 +12,6 @@ namespace ListMaster.Server.Models
         
         public string Name { get; set; }
 
-        public ApplicationUser Creator { get; set; }
-
         public ICollection<Listoid> Listoids { get; set; }
 
         public bool Active { get; set; }

@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ListMaster.Server.Data;
 using ListMaster.Server.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ListMaster.Server.Controllers
-{    
+{        
     [Route("[controller]")]
     public class MasterListsController : Controller
     {
@@ -53,30 +54,12 @@ namespace ListMaster.Server.Controllers
             return View();
         }
 
-        //// POST: MasterLists/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost("create")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("MasterListId,Name,Active")] MasterList masterList)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(masterList);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(masterList);
-        //}
-
-
-
         // POST: MasterLists/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromBody] MasterList masterList)
+        public async Task<IActionResult> Create([Bind("MasterListId,Name,Active")] MasterList masterList)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +69,6 @@ namespace ListMaster.Server.Controllers
             }
             return View(masterList);
         }
-
-
-
 
 
         // GET: MasterLists/Edit/5
