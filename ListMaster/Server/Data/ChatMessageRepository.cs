@@ -31,19 +31,11 @@ namespace ListMaster.Server.Data
 
             
             foreach (ChatMessage message in messages)
-            {
-                int NumberOfKudos = 0;
-                    
-                if(message.MessageKudos != null)
-                {
-                    NumberOfKudos = message.MessageKudos.Count();
-                }
-
+            {                
                 results.Add(new ChatMessageViewModel()
                 {
                     MessageBody = message.MessageBody,
                     Username = message.User.UserName,
-                    Kudos = NumberOfKudos,
                     CreatedDate = message.CreatedDate
                 });
             }

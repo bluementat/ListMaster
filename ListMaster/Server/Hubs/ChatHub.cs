@@ -51,7 +51,6 @@ namespace ListMaster.Server.Hubs
             var messageToSave = new ChatMessage()
             {
                 MessageBody = message.MessageBody,
-                MessageKudos = new List<Kudo>(),
                 User = user,
                 CreatedDate = message.CreatedDate,
             };
@@ -87,7 +86,7 @@ namespace ListMaster.Server.Hubs
             _listrepo.GiveListoidAKudo(new Kudo
             {
                 User = user,
-                listoid = thelistoid
+                listoid = thelistoid,                
             });
         }
     }

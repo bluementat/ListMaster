@@ -55,7 +55,6 @@ namespace ListMaster.Client.Shared
                 {
                     MessageBody = _messageInput,
                     Username = user.Identity.Name,
-                    Kudos = 0,
                     CreatedDate = DateTime.Now
 
                 }).ContinueWith(delegate { ClearChatTextBox(); });
@@ -75,7 +74,6 @@ namespace ListMaster.Client.Shared
                 {
                     MessageBody = _messageInput,
                     Username = user.Identity.Name,
-                    Kudos = 0,
                     CreatedDate = DateTime.Now
 
                 }).ContinueWith(delegate { ClearChatTextBox(); });

@@ -36,7 +36,7 @@ namespace ListMaster.Server.Data
 
             var CurrentList = GetActiveList();
 
-            var ListOfListoids = _context.Listoids.Where(l => l.MasterList == CurrentList).OrderBy(l => l.CreateDate).Include(u => u.User);
+            var ListOfListoids = _context.Listoids.Where(l => l.MasterList == CurrentList).OrderBy(l => l.CreateDate).Include(u => u.User).Include(k => k.Kudos);
 
             foreach (Listoid listoid in ListOfListoids)
             {
@@ -67,6 +67,11 @@ namespace ListMaster.Server.Data
         {                        
             MasterList currentlist = _context.MasterLists.FirstOrDefault(m => m.Active);
 
+            if (currentlist == null)
+            {
+                return "";
+            }
+
             return currentlist.Name;
         }
 
@@ -76,7 +81,7 @@ namespace ListMaster.Server.Data
 
             var CurrentList = GetActiveList();
 
-            var ListOfListoids = _context.Listoids.Where(l => l.MasterList == CurrentList).OrderBy(l => l.CreateDate).Include(u => u.User);
+            var ListOfListoids = _context.Listoids.Where(l => l.MasterList == CurrentList).OrderBy(l => l.CreateDate).Include(u => u.User).Include(k => k.Kudos);
 
             foreach (Listoid listoid in ListOfListoids)
             {

@@ -8,9 +8,7 @@ namespace ListMaster.Shared.Models
     {
         public string MessageBody { get; set; }
 
-        public string Username { get; set; }
-
-        public int Kudos { get; set; }
+        public string Username { get; set; }        
 
         public DateTime CreatedDate { get; set; }
     }

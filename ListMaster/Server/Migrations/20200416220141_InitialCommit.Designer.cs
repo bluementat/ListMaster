@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListMaster.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200416200934_ConnectKudoToLostoid")]
-    partial class ConnectKudoToLostoid
+    [Migration("20200416220141_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -198,9 +198,6 @@ namespace ListMaster.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChatMessageId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ListoidId")
                         .HasColumnType("int");
 
@@ -208,8 +205,6 @@ namespace ListMaster.Server.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("KudoId");
-
-                    b.HasIndex("ChatMessageId");
 
                     b.HasIndex("ListoidId");
 
@@ -408,10 +403,6 @@ namespace ListMaster.Server.Migrations
 
             modelBuilder.Entity("ListMaster.Server.Models.Kudo", b =>
                 {
-                    b.HasOne("ListMaster.Server.Models.ChatMessage", null)
-                        .WithMany("MessageKudos")
-                        .HasForeignKey("ChatMessageId");
-
                     b.HasOne("ListMaster.Server.Models.Listoid", "listoid")
                         .WithMany("Kudos")
                         .HasForeignKey("ListoidId");

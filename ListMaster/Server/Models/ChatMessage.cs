@@ -15,8 +15,6 @@ namespace ListMaster.Server.Models
 
         public ApplicationUser User { get; set; }
 
-        public ICollection<Kudo> MessageKudos { get; set; }
-
         public DateTime CreatedDate { get; set; }
     }
 }
