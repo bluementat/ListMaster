@@ -45,34 +45,40 @@ namespace ListMaster.Client.Shared
 
         async Task Send()
         {
-            var authState = await authenticationStateTask;
-            var user = authState.User;
-
-            await _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel()
+            if (_messageInput.Trim().Length > 0)
             {
-                MessageBody = _messageInput,
-                Username = user.Identity.Name,
-                Kudos = 0,
-                CreatedDate = DateTime.Now
+                var authState = await authenticationStateTask;
+                var user = authState.User;
 
-            }).ContinueWith(delegate { ClearChatTextBox(); });
+                await _hubConnection.SendAsync("SendMessage", new ChatMessageViewModel()
+                {
+                    MessageBody = _messageInput,
+                    Username = user.Identity.Name,
+                    Kudos = 0,
+                    CreatedDate = DateTime.Now
 
+                }).ContinueWith(delegate { ClearChatTextBox(); });
+            }
+                        
         }
 
 
         async Task AddToList()
         {
-            var authState = await authenticationStateTask;
-            var user = authState.User;
-
-            await _hubConnection.SendAsync("SendListoid", new ChatMessageViewModel()
+            if (_messageInput.Trim().Length > 0)
             {
-                MessageBody = _messageInput,
-                Username = user.Identity.Name,
-                Kudos = 0,
-                CreatedDate = DateTime.Now
+                var authState = await authenticationStateTask;
+                var user = authState.User;
 
-            }).ContinueWith(delegate { ClearChatTextBox(); });
+                await _hubConnection.SendAsync("SendListoid", new ChatMessageViewModel()
+                {
+                    MessageBody = _messageInput,
+                    Username = user.Identity.Name,
+                    Kudos = 0,
+                    CreatedDate = DateTime.Now
+
+                }).ContinueWith(delegate { ClearChatTextBox(); });
+            }            
         }
             
 
