@@ -15,6 +15,10 @@ namespace ListMaster.Server.Data
 
         public IEnumerable<ListoidViewModel> GetAllPurgatoryItemsForClient();
 
+        public string GetMasterListName();
+
+        public IEnumerable<ListoidViewModel> GetAllCurrentMasterListForClient();
+
         // public IEnumerable<Listoid> GetListoidsFromMasterList(MasterList masterlist);
     }
 }

@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager NavigationManager
+
+<div class="masterlistcomponent">
+    <div class="masterlisttitle">
+        @_listTitle
+    </div>
+    <div class="masterlist">
+        @foreach (var listitem in _listitems)
+        {
+            <div class="masterlistitem">
+                <div class="masterlistmessagebody">
+                    @listitem.MessageBody
+                </div>
+                <div class="masterlistkudocount">
+                    @listitem.Kudos Kudos
+                </div>
+                <div class="masterlistkudobutton">
+                    <button class="btn-sm">Kudo</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

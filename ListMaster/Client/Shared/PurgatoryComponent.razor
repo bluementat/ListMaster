@@ -6,8 +6,16 @@
     <div class="purgatorycomponent">        
         @foreach (var listitem in _listitems)
         {
-            <div class="purgatoryitem">
-                <p>@listitem.MessageBody</p>
+        <div class="purgatoryitem">
+            <div class="purgatorymessagebody">
+                @listitem.MessageBody
             </div>
+            <div class="purgatorykudocount">
+                @listitem.Kudos Kudos
+            </div> 
+            <div class="purgatorykudobutton">
+                <button class="btn-sm">Kudo</button>
+            </div>
+        </div>            
         }
     </div>

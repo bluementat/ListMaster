@@ -26,24 +26,6 @@
     background-color: wheat;
 }
 
-.purgatorycomponent {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    background-color: lightcoral;
-    height: inherit;
-    width: inherit;
-}
-
-.purgatoryitem {
-    border-radius: 5px;
-    border-color: black;
-    width: 50%;
-    padding: 2px;
-    margin: 2px;
-    background-color: darkgoldenrod;
-}
-
 .chattextbox {
     flex: 1;
     display: flex;

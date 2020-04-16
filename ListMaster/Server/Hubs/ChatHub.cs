@@ -34,6 +34,16 @@ namespace ListMaster.Server.Hubs
             await Clients.Client(connectionid).SendAsync("ReceiveCurrentPurgatoryItems", _listrepo.GetAllPurgatoryItemsForClient());
         }
 
+
+
+        public async Task GetCurrentMasterList(string connectionid)
+        {
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMasterList", _listrepo.GetMasterListName(),
+                _listrepo.GetAllCurrentMasterListForClient());
+        }
+
+
+
         public async Task SendMessage(ChatMessageViewModel message)
         {
             var user = await _userManager.FindByNameAsync(message.Username);

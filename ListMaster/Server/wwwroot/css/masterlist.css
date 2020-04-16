@@ -1,0 +1,49 @@
+﻿masterlistcomponent {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: tan;
+    height: inherit;
+    width: inherit;
+}
+
+.masterlisttitle {
+    flex: 1;
+}
+
+.masterlist {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: lightblue;
+    height: inherit;
+    width: inherit;
+}
+
+.masterlistitem {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    border-radius: 5px;
+    border-color: black;
+    height: 50px;
+    width: 50%;
+    padding: 2px;
+    margin: 2px;
+    font-size: 10pt;
+    background-color: mediumslateblue;
+}
+
+.masterlistmessagebody {
+    flex: 8;
+}
+}
+
+.masterlistkudocount {
+    flex: 2;
+    height: 50px;
+}
+
+.masterlistkudobutton {
+    flex: 1;
+}
