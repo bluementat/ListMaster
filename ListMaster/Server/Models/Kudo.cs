@@ -11,5 +11,7 @@ namespace ListMaster.Server.Models
         public int KudoId { get; set; }
 
         public ApplicationUser User { get; set; }
+
+        public Listoid listoid { get; set; }
     }
 }

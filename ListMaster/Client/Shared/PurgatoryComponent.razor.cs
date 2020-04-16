@@ -36,5 +36,17 @@ namespace ListMaster.Client.Shared
         Task LoadCurrentPurgatoryItems() =>
             _hubConnection.SendAsync("GetCurrentPurgatoryItems", _hubConnection.ConnectionId);
 
+        async Task GiveAKudo(int id)
+        {
+            var authState = await authenticationStateTask;
+            var user = authState.User;
+
+            await _hubConnection.SendAsync("SendAKudo", new KudoViewModel()
+            {                
+                ListoidId = id,
+                username = user.Identity.Name,
+            });
+        }
+
     }
 }

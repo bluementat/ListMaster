@@ -51,6 +51,7 @@ namespace ListMaster.Server.Data
                 {
                     results.Add(new ListoidViewModel()
                     {
+                        ListoidId = listoid.ListoidId,
                         MessageBody = listoid.MessageBody,
                         Username = listoid.User.UserName,
                         Kudos = NumberOfKudos,
@@ -90,6 +91,7 @@ namespace ListMaster.Server.Data
                 {
                     results.Add(new ListoidViewModel()
                     {
+                        ListoidId = listoid.ListoidId,
                         MessageBody = listoid.MessageBody,
                         Username = listoid.User.UserName,
                         Kudos = NumberOfKudos,
@@ -99,6 +101,19 @@ namespace ListMaster.Server.Data
             }
 
             return results;
+        }
+
+        public bool GiveListoidAKudo(Kudo kudo)
+        {                        
+            _context.Kudos.Add(kudo);
+
+            int result = _context.SaveChanges();
+            return result == 0;
+        }
+
+        public Listoid GetListoidById(int id)
+        {
+            return _context.Listoids.FirstOrDefault(l => l.ListoidId == id);
         }
     }
 }

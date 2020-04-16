@@ -78,5 +78,17 @@ namespace ListMaster.Server.Hubs
 
             _listrepo.AddListoidToList(listoidToAdd);
         }
+
+        public async Task SendAKudo(KudoViewModel kudovm)
+        {
+            var user = await _userManager.FindByNameAsync(kudovm.username);
+            var thelistoid = _listrepo.GetListoidById(kudovm.ListoidId);
+
+            _listrepo.GiveListoidAKudo(new Kudo
+            {
+                User = user,
+                listoid = thelistoid
+            });
+        }
     }
 }

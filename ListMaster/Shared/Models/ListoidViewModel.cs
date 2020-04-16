@@ -6,6 +6,7 @@ namespace ListMaster.Shared.Models
 {
     public class ListoidViewModel
     {
+        public int ListoidId { get; set; }
 
         public int MasterListId { get; set; }
 

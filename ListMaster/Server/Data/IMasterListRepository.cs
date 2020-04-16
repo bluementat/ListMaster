@@ -19,6 +19,8 @@ namespace ListMaster.Server.Data
 
         public IEnumerable<ListoidViewModel> GetAllCurrentMasterListForClient();
 
-        // public IEnumerable<Listoid> GetListoidsFromMasterList(MasterList masterlist);
+        public bool GiveListoidAKudo(Kudo kudo);
+
+        public Listoid GetListoidById(int id);
     }
 }
