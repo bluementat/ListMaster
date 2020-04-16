@@ -1,4 +1,6 @@
 ﻿using ListMaster.Server.Models;
+using ListMaster.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,35 @@ namespace ListMaster.Server.Data
             int result = _context.SaveChanges();
 
             return result == 0;
+        }
+
+        public IEnumerable<ListoidViewModel> GetAllPurgatoryItemsForClient()
+        {
+            List<ListoidViewModel> results = new List<ListoidViewModel>();
+
+            var CurrentList = GetActiveList();
+
+            var ListOfListoids = _context.Listoids.Where(l => l.MasterList == CurrentList).OrderBy(l => l.CreateDate).Include(u => u.User);
+
+            foreach (Listoid listoid in ListOfListoids)
+            {
+                int NumberOfKudos = 0;
+
+                if (listoid.Kudos != null)
+                {
+                    NumberOfKudos = listoid.Kudos.Count();
+                }
+
+                results.Add(new ListoidViewModel()
+                {
+                    MessageBody = listoid.MessageBody,
+                    Username = listoid.User.UserName,
+                    Kudos = NumberOfKudos,
+                    CreateDate = listoid.CreateDate
+                });
+            }
+
+            return results;
         }
     }
 }

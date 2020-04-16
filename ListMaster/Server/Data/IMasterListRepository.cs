@@ -1,4 +1,5 @@
 ﻿using ListMaster.Server.Models;
+using ListMaster.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace ListMaster.Server.Data
         public MasterList GetActiveList();
 
         public bool AddListoidToList(Listoid listoid);
+
+        public IEnumerable<ListoidViewModel> GetAllPurgatoryItemsForClient();
 
         // public IEnumerable<Listoid> GetListoidsFromMasterList(MasterList masterlist);
     }

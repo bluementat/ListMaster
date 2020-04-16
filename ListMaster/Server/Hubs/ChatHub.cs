@@ -28,6 +28,12 @@ namespace ListMaster.Server.Hubs
             await Clients.Client(connectionid).SendAsync("ReceiveCurrentMessages", _messagerepo.GetAllMessagesForClient());
         }
 
+
+        public async Task GetCurrentPurgatoryItems(string connectionid)
+        {
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentPurgatoryItems", _listrepo.GetAllPurgatoryItemsForClient());
+        }
+
         public async Task SendMessage(ChatMessageViewModel message)
         {
             var user = await _userManager.FindByNameAsync(message.Username);

@@ -35,6 +35,7 @@ namespace ListMaster.Client.Shared
                 _messages = messages;
                 StateHasChanged();
             });
+
             var authState = await authenticationStateTask;
 
             await _hubConnection.StartAsync().ContinueWith(delegate { LoadCurrentMessages(); });

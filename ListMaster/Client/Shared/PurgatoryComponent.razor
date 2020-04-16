@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager NavigationManager
+
+    <div class="purgatorycomponent">        
+        @foreach (var listitem in _listitems)
+        {
+            <div class="purgatoryitem">
+                <p>@listitem.MessageBody</p>
+            </div>
+        }
+    </div>

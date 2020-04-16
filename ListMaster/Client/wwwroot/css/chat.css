@@ -17,7 +17,7 @@
     background-color: slategray;
 }
 
-.listitem {
+.chatitem {
     /*flex: 1;*/
     border-radius: 5px;
     border-color: black;
