@@ -23,10 +23,11 @@ namespace ListMaster.Client.Shared
                 .Build();
 
             _hubConnection.On<List<ListoidViewModel>>("ReceiveCurrentPurgatoryItems", (listitems) =>
-            {
+            {                
                 _listitems = listitems;
                 StateHasChanged();
             });
+           
 
             var authState = await authenticationStateTask;
 
@@ -41,7 +42,7 @@ namespace ListMaster.Client.Shared
             var authState = await authenticationStateTask;
             var user = authState.User;
 
-            await _hubConnection.SendAsync("SendAKudo", new KudoViewModel()
+            await _hubConnection.SendAsync("SendAKudo", _hubConnection.ConnectionId, new KudoViewModel()
             {                
                 ListoidId = id,
                 username = user.Identity.Name,

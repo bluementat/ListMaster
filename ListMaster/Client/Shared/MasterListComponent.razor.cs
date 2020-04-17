@@ -25,7 +25,7 @@ namespace ListMaster.Client.Shared
 
             _hubConnection.On<string, List<ListoidViewModel>>("ReceiveCurrentMasterList", (masterlistname, listitems) =>
             {
-                _listTitle = masterlistname;
+                _listTitle = masterlistname;                
                 _listitems = listitems;
                 StateHasChanged();
             });
@@ -38,5 +38,17 @@ namespace ListMaster.Client.Shared
 
         Task LoadCurrentMasterList() =>
             _hubConnection.SendAsync("GetCurrentMasterList", _hubConnection.ConnectionId);
+
+        async Task GiveAKudo(int id)
+        {
+            var authState = await authenticationStateTask;
+            var user = authState.User;
+
+            await _hubConnection.SendAsync("SendAKudo", _hubConnection.ConnectionId, new KudoViewModel()
+            {
+                ListoidId = id,
+                username = user.Identity.Name,
+            });
+        }
     }
 }

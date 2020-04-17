@@ -19,7 +19,7 @@ namespace ListMaster.Server.Data
 
         public IEnumerable<ListoidViewModel> GetAllCurrentMasterListForClient();
 
-        public bool GiveListoidAKudo(Kudo kudo);
+        public Task GiveListoidAKudo(Kudo kudo);
 
         public Listoid GetListoidById(int id);
     }

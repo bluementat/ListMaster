@@ -18,7 +18,14 @@
                     @listitem.Kudos Kudos
                 </div>
                 <div class="masterlistkudobutton">
-                    <button class="btn-sm">Kudo</button>
+                    <AuthorizeView>
+                        <Authorized>
+                            <button @onclick="(() => GiveAKudo(listitem.ListoidId))" class="btn-sm">Kudo</button>
+                        </Authorized>
+                        <NotAuthorized>
+                            <button class="btn-sm" disabled>Kudo</button>
+                        </NotAuthorized>
+                    </AuthorizeView>
                 </div>
             </div>
         }

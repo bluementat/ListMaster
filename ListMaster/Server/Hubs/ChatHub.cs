@@ -78,16 +78,21 @@ namespace ListMaster.Server.Hubs
             _listrepo.AddListoidToList(listoidToAdd);
         }
 
-        public async Task SendAKudo(KudoViewModel kudovm)
+        public async Task SendAKudo(string connectionid, KudoViewModel kudovm)
         {
             var user = await _userManager.FindByNameAsync(kudovm.username);
             var thelistoid = _listrepo.GetListoidById(kudovm.ListoidId);
 
-            _listrepo.GiveListoidAKudo(new Kudo
+            await _listrepo.GiveListoidAKudo(new Kudo
             {
                 User = user,
-                listoid = thelistoid,                
+                listoid = thelistoid,
             });
+
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentPurgatoryItems", _listrepo.GetAllPurgatoryItemsForClient());
+
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMasterList", _listrepo.GetMasterListName(),
+                _listrepo.GetAllCurrentMasterListForClient());
         }
     }
 }

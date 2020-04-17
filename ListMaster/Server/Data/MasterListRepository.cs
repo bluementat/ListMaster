@@ -108,12 +108,10 @@ namespace ListMaster.Server.Data
             return results;
         }
 
-        public bool GiveListoidAKudo(Kudo kudo)
+        public async Task GiveListoidAKudo(Kudo kudo)
         {                        
             _context.Kudos.Add(kudo);
-
-            int result = _context.SaveChanges();
-            return result == 0;
+            await _context.SaveChangesAsync();            
         }
 
         public Listoid GetListoidById(int id)
