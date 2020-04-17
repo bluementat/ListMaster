@@ -4,7 +4,7 @@
     position: relative;
     background-color: tan;
     height: inherit;
-    width: inherit;
+    width: inherit;    
 }
 
 .purgatoryitem {
@@ -14,9 +14,9 @@
     border-radius: 5px;
     border-color: black;
     height: 50px;
-    width: 50%;
+    width: 400px;
     padding: 2px;
-    margin: 2px;
+    margin: 5px;
     font-size: 10pt;
     background-color: darkgoldenrod;
 }

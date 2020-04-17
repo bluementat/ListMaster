@@ -10,6 +10,7 @@
                 @foreach (var message in _messages)
                 {
                     <div class="chatitem">
+                        <p class="chatitemsmalltext">@message.Username - @message.CreatedDate</p>
                         <p>@message.MessageBody</p>
                     </div>
                 }

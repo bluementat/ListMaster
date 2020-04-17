@@ -28,6 +28,10 @@
     background-color: wheat;
 }
 
+.chatitemsmalltext {
+    font-size: 8pt;
+}
+
 .chattextbox {
     flex: 1;
     display: flex;
