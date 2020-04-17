@@ -27,6 +27,12 @@ namespace ListMaster.Client.Shared
                 _listitems = listitems;
                 StateHasChanged();
             });
+
+            _hubConnection.On<ListoidViewModel>("NewPurgatoryItem", (newlistoid) =>
+            {
+                _listitems.Add(newlistoid);
+                StateHasChanged();
+            });
            
 
             var authState = await authenticationStateTask;
@@ -37,15 +43,16 @@ namespace ListMaster.Client.Shared
         Task LoadCurrentPurgatoryItems() =>
             _hubConnection.SendAsync("GetCurrentPurgatoryItems", _hubConnection.ConnectionId);
 
-        async Task GiveAKudo(int id)
+        async Task GiveAKudo(int id, int kudocount)
         {
             var authState = await authenticationStateTask;
             var user = authState.User;
 
-            await _hubConnection.SendAsync("SendAKudo", _hubConnection.ConnectionId, new KudoViewModel()
-            {                
+            await _hubConnection.SendAsync("SendAKudo", _hubConnection.ConnectionId, kudocount, new KudoViewModel()
+            {
                 ListoidId = id,
                 username = user.Identity.Name,
+                
             });
         }
 

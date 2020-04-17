@@ -17,7 +17,7 @@
             <div class="purgatorykudobutton">
                 <AuthorizeView>
                     <Authorized>
-                        <button @onclick="(() => GiveAKudo(listitem.ListoidId))" class="btn-sm">Kudo</button>
+                        <button @onclick="(() => GiveAKudo(listitem.ListoidId, listitem.Kudos))" class="btn-sm">Kudo</button>
                     </Authorized>
                     <NotAuthorized>
                         <button class="btn-sm" disabled>Kudo</button>

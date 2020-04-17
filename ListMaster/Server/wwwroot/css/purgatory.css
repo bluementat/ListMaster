@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    flex-wrap: wrap;
     background-color: tan;
     height: inherit;
-    width: inherit;    
+    width: inherit;
 }
 
 .purgatoryitem {
@@ -18,7 +19,7 @@
     padding: 2px;
     margin: 5px;
     font-size: 10pt;
-    background-color: darkgoldenrod;
+    background-color: blanchedalmond;
 }
 
 .purgatorymessagebody {

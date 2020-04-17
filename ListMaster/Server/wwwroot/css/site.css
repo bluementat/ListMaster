@@ -107,7 +107,7 @@ button.accept-policy {
 
 .topmenu {
     flex: 1;
-    background-color: navajowhite;
+    background-color: blanchedalmond;
     display: flex;
     flex-direction: row;
     position: relative;
@@ -120,10 +120,13 @@ button.accept-policy {
     min-height: 30px;
     border: thick;
     border-radius: 5px;
-    background-color: aqua;
+    background-color: darkblue;
+    color: blanchedalmond;
     text-align: center;
     vertical-align: middle;
     padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .listchatactivities {
@@ -151,12 +154,12 @@ button.accept-policy {
 
 .mainlist {
     flex: 3;
-    background-color: dimgray;
+    background-color: white;
     margin: 5px;
 }
 
 .purgatory {
     flex: 1;
-    background-color: gray;
+    background-color: tan;
     margin: 5px;
 }

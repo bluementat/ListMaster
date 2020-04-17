@@ -19,7 +19,7 @@
     flex-direction: row;
     position: relative;
     flex-wrap: wrap;
-    background-color: lightblue;
+    background-color: white;
     height: inherit;
     width: inherit; 
 }
@@ -35,7 +35,7 @@
     padding: 2px;
     margin: 5px;
     font-size: 10pt;
-    background-color: mediumslateblue;
+    background-color:blanchedalmond;
 }
 
 .listitemfont {

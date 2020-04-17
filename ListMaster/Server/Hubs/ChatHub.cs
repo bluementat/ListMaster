@@ -75,10 +75,21 @@ namespace ListMaster.Server.Hubs
                 CreateDate = DateTime.Now
             };
 
+            var listoidViewModel = new ListoidViewModel()
+            {
+                MasterListId = currentlist.MasterListId,
+                Kudos = 0,
+                MessageBody = message.MessageBody,
+                Username = user.UserName,
+                CreateDate = DateTime.Now
+            };
+
             _listrepo.AddListoidToList(listoidToAdd);
+
+            await Clients.All.SendAsync("NewPurgatoryItem", listoidViewModel);
         }
 
-        public async Task SendAKudo(string connectionid, KudoViewModel kudovm)
+        public async Task SendAKudo(string connectionid, int kudocount, KudoViewModel kudovm)
         {
             var user = await _userManager.FindByNameAsync(kudovm.username);
             var thelistoid = _listrepo.GetListoidById(kudovm.ListoidId);
@@ -87,6 +98,20 @@ namespace ListMaster.Server.Hubs
             {
                 User = user,
                 listoid = thelistoid,
+            }).ContinueWith( delegate { 
+                if(kudocount > 1)
+                {
+                    var x = _listrepo.GetActiveList();
+                    var listoidViewModel = new ListoidViewModel()
+                    {
+                        MasterListId = x.MasterListId,
+                        Kudos = 3,
+                        MessageBody = thelistoid.MessageBody,
+                        Username = thelistoid.User.UserName,
+                        CreateDate = thelistoid.CreateDate
+                    };
+                    Clients.All.SendAsync("NewMasterListItem", listoidViewModel);
+                }
             });
 
             await Clients.Client(connectionid).SendAsync("ReceiveCurrentPurgatoryItems", _listrepo.GetAllPurgatoryItemsForClient());
