@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace ListMaster.Server.Data
 {
@@ -22,5 +23,27 @@ namespace ListMaster.Server.Data
         public DbSet<Kudo> Kudos { get; set; }
         public DbSet<MasterList> MasterLists { get; set; }
         public DbSet<Listoid> Listoids { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            });
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "user",
+                NormalizedName = "user"
+            });
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+
+            });
+
+        }
     }
 }
