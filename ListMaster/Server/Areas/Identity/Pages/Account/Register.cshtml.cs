@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ListMaster.Server.Areas.Identity.Pages.Account
 {
@@ -22,23 +23,31 @@ namespace ListMaster.Server.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+
+            List<IdentityRole> listOfRoles = roleManager.Roles.ToList();
+            AvailableRoles = new SelectList(listOfRoles, nameof(IdentityRole.Id), nameof(IdentityRole.Name));
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public SelectList AvailableRoles { get; set; }
 
         public string ReturnUrl { get; set; }
 
@@ -46,6 +55,11 @@ namespace ListMaster.Server.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "User Name")]
+            public string UserName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -61,7 +75,12 @@ namespace ListMaster.Server.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-        }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Role")]
+            public string UserRole { get; set; }
+        }        
 
         public async Task OnGetAsync(string returnUrl = null)
         {
