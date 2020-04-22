@@ -43,7 +43,9 @@ namespace ListMaster.Server.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]            
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "User Name")]
             public string UserName { get; set; }
 
             [Required]

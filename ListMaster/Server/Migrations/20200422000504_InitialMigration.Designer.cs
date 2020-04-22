@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListMaster.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200421224211_SeedRoles")]
-    partial class SeedRoles
+    [Migration("20200422000504_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -166,19 +166,6 @@ namespace ListMaster.Server.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "2bebcd47-ceb1-4668-8faa-92c681d074b6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f463d285-e74f-4290-b7a8-a3075363829b",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d17674e9-9ea5-46d7-9e5d-d06dc2b79ae1",
-                            TwoFactorEnabled = false
-                        });
                 });
 
             modelBuilder.Entity("ListMaster.Server.Models.ChatMessage", b =>
@@ -301,15 +288,15 @@ namespace ListMaster.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "853effed-af79-4b46-8b0b-3e37f908eabe",
-                            ConcurrencyStamp = "ed84b7fb-aa48-49f3-9a9b-ff570b3d876e",
+                            Id = "f5330e6e-261b-47e0-9033-f4325eabf637",
+                            ConcurrencyStamp = "7478deab-8f47-4010-8fa4-4b0ee3f04d84",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2e62adba-985e-43fb-8f6e-288c8f822be5",
-                            ConcurrencyStamp = "ef0e87e7-7202-478d-8deb-ee43fe86fae8",
+                            Id = "59fb4e87-49ac-4a70-b281-5651f19ba5cc",
+                            ConcurrencyStamp = "52d76475-d7c3-42e4-aca8-af3cf666d583",
                             Name = "user",
                             NormalizedName = "user"
                         });

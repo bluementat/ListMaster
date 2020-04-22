@@ -39,11 +39,6 @@ namespace ListMaster.Server.Data
                 Name = "user",
                 NormalizedName = "user"
             });
-            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
-            {
-
-            });
-
         }
     }
 }

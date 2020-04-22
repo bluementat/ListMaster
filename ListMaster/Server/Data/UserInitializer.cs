@@ -20,7 +20,9 @@ namespace ListMaster.Server.Data
             {
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = "admin";
+                user.NormalizedUserName = "ADMIN";
                 user.Email = "admin@ListMaster";
+                user.EmailConfirmed = true;
 
                 IdentityResult result = userManager.CreateAsync(user, "password").Result;
 
