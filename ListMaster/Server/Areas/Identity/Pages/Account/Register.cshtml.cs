@@ -41,7 +41,7 @@ namespace ListMaster.Server.Areas.Identity.Pages.Account
             _emailSender = emailSender;
 
             List<IdentityRole> listOfRoles = roleManager.Roles.ToList();
-            AvailableRoles = new SelectList(listOfRoles, nameof(IdentityRole.Id), nameof(IdentityRole.Name));
+            AvailableRoles = new SelectList(listOfRoles, nameof(IdentityRole.Name), nameof(IdentityRole.Name));
         }
 
         [BindProperty]
