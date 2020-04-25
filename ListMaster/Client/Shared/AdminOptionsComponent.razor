@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView Roles="Admin">
+    <div class="topmenulink">
+        <a href="masterlists/home">Administration</a>
+    </div>
+</AuthorizeView>

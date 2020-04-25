@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListMaster.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200422000504_InitialMigration")]
+    [Migration("20200425201059_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -284,22 +284,6 @@ namespace ListMaster.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f5330e6e-261b-47e0-9033-f4325eabf637",
-                            ConcurrencyStamp = "7478deab-8f47-4010-8fa4-4b0ee3f04d84",
-                            Name = "admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "59fb4e87-49ac-4a70-b281-5651f19ba5cc",
-                            ConcurrencyStamp = "52d76475-d7c3-42e4-aca8-af3cf666d583",
-                            Name = "user",
-                            NormalizedName = "user"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

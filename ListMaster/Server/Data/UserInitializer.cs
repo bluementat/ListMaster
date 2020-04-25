@@ -7,14 +7,36 @@ using System.Threading.Tasks;
 
 namespace ListMaster.Server.Data
 {
-    public static class UserInitializer
+    public class UserInitializer
     {
-        public static void SeedData(UserManager<ApplicationUser> userManager)
-        {            
-            SeedUsers(userManager);
+        public async Task SeedData(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
+        {
+            await SeedRoles(roleManager);
+            await SeedUsers(userManager);
+            await SeedRoleClaims(roleManager, context);
         }
 
-        private static void SeedUsers(UserManager<ApplicationUser> userManager)
+        private async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+        {          
+            IdentityResult adminRoleResult;
+            IdentityResult subscriberRoleResult;
+
+            bool adminRoleExists = await roleManager.RoleExistsAsync("Admin");
+            bool subscriberRoleExists = await roleManager.RoleExistsAsync("User");
+
+            if (!adminRoleExists)
+            {
+                adminRoleResult = await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            if (!subscriberRoleExists)
+            {
+                subscriberRoleResult = await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
+        }
+
+        private async Task SeedUsers(UserManager<ApplicationUser> userManager)
         {
             if (userManager.FindByEmailAsync("admin@ListMaster").Result == null)
             {
@@ -24,13 +46,40 @@ namespace ListMaster.Server.Data
                 user.Email = "admin@ListMaster";
                 user.EmailConfirmed = true;
 
-                IdentityResult result = userManager.CreateAsync(user, "password").Result;
+                IdentityResult result = await userManager.CreateAsync(user, "password");
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "Admin").Wait();
+                    await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
+        }
+
+        private async Task SeedRoleClaims(RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
+        {
+            IdentityRole role = roleManager.FindByNameAsync("Admin").Result;
+            if(!(context.RoleClaims.Any(c => c.ClaimValue == "AddAdministrator")))
+            {
+                context.RoleClaims.Add(new IdentityRoleClaim<string>
+                {
+                    ClaimType = "Permission",
+                    ClaimValue = "AddAdministrator",
+                    RoleId = role.Id,
+                });
+            }            
+
+            role = roleManager.FindByNameAsync("User").Result;
+            if (!(context.RoleClaims.Any(c => c.ClaimValue == "AddUser")))
+            {
+                context.RoleClaims.Add(new IdentityRoleClaim<string>
+                {
+                    ClaimType = "Permission",
+                    ClaimValue = "AddUser",
+                    RoleId = role.Id,
+                });
+            }            
+
+            await context.SaveChangesAsync();
         }
         
     }

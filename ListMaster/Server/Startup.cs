@@ -58,12 +58,17 @@ namespace ListMaster.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>(); 
             services.AddScoped<IMasterListRepository, MasterListRepository>();
+
+            services.AddHostedService<SeedingHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -78,7 +83,7 @@ namespace ListMaster.Server
                 app.UseHsts();
             }
 
-            UserInitializer.SeedData(userManager);
+            
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();

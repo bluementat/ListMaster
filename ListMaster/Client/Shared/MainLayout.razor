@@ -1,26 +1,36 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inherits LayoutComponentBase
 
 <div class="mainview">
     <div class="topmenu">
         <div class="menuicon">
-            @Body
+            Icon
         </div>
         <div class="menuicon">
             <LoginDisplay />
-        </div>  
+        </div>
         <div class="menuicon">
-            <a href="masterlists/home" >List Maintenance</a>
+            <AdminOptionsComponent />
+        </div>
+        <div class="menuicon">
+            <UserProfileComponent />
+        </div>
+        <div class="menuicon">
+            @Body
         </div>
     </div>
 
     <div class="listchatactivities">
-        <div class="chatsection">            
+        <div class="chatsection">
             <ChatComponent />
         </div>
 
         <div class="listsection">
             <div class="mainlist">
-                <MasterListComponent />
+                @*<MasterListComponent />*@
+                <Test />
             </div>
             <div class="purgatory">
                 <PurgatoryComponent />

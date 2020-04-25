@@ -275,16 +275,6 @@ namespace ListMaster.Server.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f5330e6e-261b-47e0-9033-f4325eabf637", "7478deab-8f47-4010-8fa4-4b0ee3f04d84", "admin", "ADMIN" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "59fb4e87-49ac-4a70-b281-5651f19ba5cc", "52d76475-d7c3-42e4-aca8-af3cf666d583", "user", "user" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",

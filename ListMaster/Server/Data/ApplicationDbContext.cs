@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace ListMaster.Server.Data
 {
@@ -29,16 +30,18 @@ namespace ListMaster.Server.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Name = "admin",
-                NormalizedName = "ADMIN"
-            });
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Name = "user",
-                NormalizedName = "user"
-            });
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole
+            //{
+            //    Name = "admin",
+            //    NormalizedName = "ADMIN",
+                
+            //});
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole
+            //{
+            //    Name = "user",
+            //    NormalizedName = "USER"
+            //});
+
         }
     }
 }
