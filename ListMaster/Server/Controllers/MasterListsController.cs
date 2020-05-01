@@ -10,7 +10,8 @@ using ListMaster.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ListMaster.Server.Controllers
-{        
+{   
+    [Authorize (Roles = "Admin")]
     [Route("[controller]")]
     public class MasterListsController : Controller
     {
