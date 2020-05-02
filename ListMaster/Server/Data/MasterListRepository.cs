@@ -66,13 +66,7 @@ namespace ListMaster.Server.Data
         public string GetMasterListName()
         {                        
             MasterList currentlist = _context.MasterLists.FirstOrDefault(m => m.Active);
-
-            if (currentlist == null)
-            {
-                return "";
-            }
-
-            return currentlist.Name;
+            return currentlist?.Name;
         }
 
         public IEnumerable<ListoidViewModel> GetAllCurrentMasterListForClient()

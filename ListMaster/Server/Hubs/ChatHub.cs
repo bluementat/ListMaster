@@ -38,7 +38,8 @@ namespace ListMaster.Server.Hubs
 
         public async Task GetCurrentMasterList(string connectionid)
         {
-            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMasterList", _listrepo.GetMasterListName(),
+            var listtitle = _listrepo.GetMasterListName() ?? "Welcome to ListMaster";
+            await Clients.Client(connectionid).SendAsync("ReceiveCurrentMasterList", listtitle,
                 _listrepo.GetAllCurrentMasterListForClient());
         }
 
