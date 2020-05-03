@@ -55,23 +55,6 @@ namespace ListMaster.Server.Controllers
             return View();
         }
 
-        // POST: MasterLists/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("create")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MasterListId,Name,Active")] MasterList masterList)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(masterList);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(masterList);
-        }
-
-
         // GET: MasterLists/Edit/5
         [HttpGet("edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
@@ -89,10 +72,26 @@ namespace ListMaster.Server.Controllers
             return View(masterList);
         }
 
+        // POST: MasterLists/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost("create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("MasterListId,Name,Active")] MasterList masterList)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(masterList);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(masterList);
+        }
+      
         // POST: MasterLists/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("edit/{masterlist}")]
+        [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MasterListId,Name,Active")] MasterList masterList)
         {
