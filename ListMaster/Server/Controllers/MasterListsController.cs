@@ -104,6 +104,28 @@ namespace ListMaster.Server.Controllers
             {
                 try
                 {
+                    var currentActiveList = _context.MasterLists.FirstOrDefault(m => m.Active);
+                    if(currentActiveList != null && masterList.Active)
+                    {
+                        currentActiveList.Active = false;
+                        _context.Update(masterList);
+                        await _context.SaveChangesAsync();
+                    }                        
+                }
+                catch
+                {
+                    if (!MasterListExists(masterList.MasterListId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                try
+                {                    
                     _context.Update(masterList);
                     await _context.SaveChangesAsync();
                 }
