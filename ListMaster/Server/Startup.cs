@@ -82,17 +82,16 @@ namespace ListMaster.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            
-
+           
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
+            app.UseIdentityServer();
+
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
+            app.UseAuthentication();            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
