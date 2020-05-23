@@ -3,3 +3,4 @@ A .NET Core application built to try out Client-side Blazor with Web Assembly wh
 
 Back Story
 ==========
+![](https://raw.githubusercontent.com/bluementat/listmaster/master/ListMaster/Server/Artwork/20191021_170153.jpg)
