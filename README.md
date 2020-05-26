@@ -1,6 +1,9 @@
 # List Master
 A .NET Core application built to try out Client-side Blazor with Web Assembly while making fun lists to pass the time away.
 
+## License
+ListMaster is to experiement with .NET Core/C#/Blazor Client-Side. However, if you want to experiment yourself, ListMaster is licensed under The MIT License. Basically, this means grants you the right to use ListMaster any way you see fit. see [LICENSE.md](https://raw.githubusercontent.com/bluementat/listmaster/master/LICENSE.md) for more information.
+
 ## Back Story
 
 ![](https://raw.githubusercontent.com/bluementat/listmaster/master/ListMaster/Server/Artwork/20191021_170153.jpg)
