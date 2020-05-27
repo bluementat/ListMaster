@@ -20,5 +20,13 @@ The next day, we had another water-cooler talk and were inspired to create anoth
 As I began to play around with Client-side Blazor, I thought it would be cool to try to make an application that served the same purpose as the "List of the Day". This repository is the result of that effort. :-)
 
 
+## Technologies
+
+* ASP.NET Core MVC / C#
+* Blazor Client-Side with WebAssembly
+* SignalR for Chat Component
+* IdentityServer 4
+* Entity Framework Core
+
 
  
