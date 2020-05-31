@@ -4,13 +4,13 @@
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/listmaster/databases/listmaster",
       "type": "mssql.azure",
       "connectionId": "DefaultConnection",
-      "secretStore": "LocalSecretsFile"
+      "secretStore": "AzureAppSettings"
     },
     "mssql1": {
-      "resourceId": null,
-      "type": "mssql.local",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/listmaster/databases/listmaster",
+      "type": "mssql.azure",
       "connectionId": "ListMasterServerContextConnection",
-      "secretStore": null
+      "secretStore": "AzureAppSettings"
     }
   }
 }
